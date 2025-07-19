@@ -1,10 +1,12 @@
-// Last updated: 7/19/2025, 11:02:59 AM
+// Last updated: 7/19/2025, 11:05:45 AM
 class Solution {
 public:
     int minimumEffortPath(vector<vector<int>>& h) {
+        
         int n = h.size();
         int m = h[0].size();
 
+        // visited array to sotore the effort -> which mainly the effort of the path 
         vector<vector<int>>vis(n,vector<int>(m,INT_MAX));
         vis[0][0]=0;
         priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<tuple<int,int,int>>>pq;
@@ -15,6 +17,8 @@ public:
         while(!pq.empty()){
             auto [e,i,j] = pq.top();
             pq.pop();
+
+            if(i == n-1 && j == m-1) return e; 
 
             for(auto [a_t,b_t]:tra){
                 a_t+=i;
