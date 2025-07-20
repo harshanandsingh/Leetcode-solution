@@ -1,3 +1,4 @@
+// Last updated: 7/20/2025, 8:17:48 AM
 class Solution {
 public:
     // vector<int> findDuplicates(vector<int>& nums) {
@@ -13,20 +14,35 @@ public:
     //     return ans;
     // }
 
+    // vector<int> findDuplicates(vector<int>& nums) {
+    //     vector<int> res;
 
-
-public:
-    vector<int> findDuplicates(vector<int>& nums) {
-        vector<int> res;
-
-        for (int num : nums) {
-            int idx = abs(num) - 1;
-            if (nums[idx] < 0) {
-                res.push_back(abs(num));
-            }
-            nums[idx] = -nums[idx];
-        }
+    //     for (int num : nums) {
+    //         int idx = abs(num) - 1;
+    //         if (nums[idx] < 0) {
+    //             res.push_back(abs(num));
+    //         }
+    //         nums[idx] = -nums[idx];
+    //     }
         
-        return res;
+    //     return res;
+    // }
+    vector<int> findDuplicates(vector<int>& nums){
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        int i=0;
+        vector<int>ans;
+        while(i<n-1){
+            if(nums[i]==nums[i+1]){
+                ans.push_back(nums[i]);
+                int j = i+1;
+                while(j<n && nums[j]==nums[i]) j++;
+                i=j;
+            }
+            else i++;
+        }
+        return ans;
     }
+    
+
 };
