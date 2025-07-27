@@ -1,47 +1,29 @@
-// Last updated: 7/27/2025, 9:45:42 AM
+// Last updated: 7/27/2025, 10:10:03 AM
 class Solution {
 public:
-    int totalFruit(vector<int>& fruits) {
+    int totalFruit(vector<int>& v) {
+        int n = v.size();
+        int last = -1, second_last = -1;
+        int last_count = 0, curr_max = 0, max_total = 0;
 
-        // you can use unordered_set -> use unordered map -> it will solve the problem 
-        unordered_map<int, int> basket;  // fruit -> count
-        int i = 0, j = 0;
-        int max_size = 0;
-
-        while (j < fruits.size()) {
-            basket[fruits[j]]++;
-
-            while (basket.size() > 2) {
-                basket[fruits[i]]--;
-                if (basket[fruits[i]] == 0) {
-                    basket.erase(fruits[i]);
-                }
-                i++;
+        for(int i = 0; i < n; i++) {
+            if(v[i] == last || v[i] == second_last) {
+                curr_max++;
+            } else {
+                curr_max = last_count + 1;
             }
 
-            max_size = max(max_size, j - i + 1);
-            j++;
+            if(v[i] == last) {
+                last_count++;
+            } else {
+                last_count = 1;
+                second_last = last;
+                last = v[i];
+            }
 
+            max_total = max(max_total, curr_max);
         }
-        return max_size;
 
-        // unordered_set<int>s;// to store unique fruite of only two tree 
-        // int i=0,j=0;
-        // int n = fruits.size();
-        // int max_size=0;
-        // while(j<n){
-        //     s.insert(fruits[j]);
-
-        //     if(s.size()>2){
-        //         s.erase(fruits[i]);
-        //         i++;
-        //     }
-
-        //     int size = j-i+1;
-        //     max_size = max(max_size,size);
-        //     j++;
-        // }
-        // return max_size;
-
+        return max_total;
     }
 };
