@@ -1,17 +1,16 @@
-// Last updated: 8/4/2025, 5:28:44 PM
+// Last updated: 8/4/2025, 5:32:11 PM
 class Solution {
 public:
-    int brokenCalc(int s, int t) {
-        // reverse start form target reach till startvalue 
-        // if even and > start value -> devide 
-        // if odd and < start value -> +1 
-
-        int c=0;
-        while(t != s){
-            if(t%2 || t<s) t+=1;
-            else if(t%2==0 || t>s) t/=2;
-            c++;
+    int brokenCalc(int startValue, int target) {
+        int res = 0;
+        while (target > startValue) {
+            if (target % 2 == 0) {
+                target /= 2;
+            } else {
+                target += 1;
+            }
+            res++;
         }
-        return c;
+        return res + (startValue - target);
     }
 };
