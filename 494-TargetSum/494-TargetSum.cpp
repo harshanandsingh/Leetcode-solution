@@ -1,4 +1,4 @@
-// Last updated: 8/6/2025, 12:22:46 PM
+// Last updated: 8/6/2025, 6:35:19 PM
 class Solution {
 public:
     int findTargetSumWays(vector<int>& arr, int d) {
@@ -6,7 +6,7 @@ public:
         int c_0 = 0;
         for(auto x : arr){
             if(x ==  0) c_0++;
-            sum+=abs(x);
+            sum+=x;
         }
         
         // s1 - s2 = d
