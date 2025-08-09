@@ -1,12 +1,12 @@
-// Last updated: 8/9/2025, 11:36:30 AM
+// Last updated: 8/9/2025, 11:38:04 AM
 class Solution {
 public:
     int Peak(vector<int>& arr,int low , int high){
         if(low > high) return -1;
         int mid = low + ( high - low ) / 2 ;
-        if( ( mid == 0 || arr[mid]>arr[mid-1] ) && ( mid == arr.size() -1 || arr[mid] > arr[mid+1] ) )return mid;
+        if( ( mid == 0 || arr[mid]>arr[mid-1] ) && ( mid == arr.size() -1 || arr[mid] > arr[mid+1] ) ) return mid;
         else if(mid !=0 && arr[mid-1]>arr[mid]) high = mid-1;
-        else if(mid != arr.size() && arr[mid+1]>arr[mid]) low = mid+1;
+        else if(mid != arr.size()-1 && arr[mid+1]>arr[mid]) low = mid+1;
         return Peak(arr,low,high);
     }
     int findPeakElement(vector<int>& nums) {
