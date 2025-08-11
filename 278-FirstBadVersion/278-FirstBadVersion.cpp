@@ -1,19 +1,22 @@
-// Last updated: 5/1/2025, 5:29:08 PM
+// Last updated: 8/11/2025, 6:33:48 AM
 // The API isBadVersion is defined for you.
 // bool isBadVersion(int version);
 
 class Solution {
 public:
     int firstBadVersion(int n) {
-        int start=1,end=n;
-        while(start<=end)
-        {
-            int mid=(end-start)/2+start;
-            if(isBadVersion(mid))
-                end=mid-1;
-            else 
-                start=mid+1;
+        int low =1,high=n;
+        //int ans = INT_MAX;
+        int ans = -1;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            bool res = isBadVersion(mid);
+            if(res){
+                ans = mid ;
+                high = mid-1;
+            }
+            else low=mid+1;
         }
-        return start;
+        return ans;
     }
 };
