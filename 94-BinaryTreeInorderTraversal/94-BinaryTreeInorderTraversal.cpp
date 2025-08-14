@@ -1,4 +1,4 @@
-// Last updated: 8/2/2025, 9:50:36 AM
+// Last updated: 8/14/2025, 10:03:31 AM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -15,9 +15,9 @@ public:
     void level_order(TreeNode* root,vector<int>&r){
         if(root == nullptr) return ;
 
-        if(root->left != nullptr) level_order(root->left,r);
+        level_order(root->left,r);
         r.push_back(root->val);
-        if(root->right != nullptr) level_order(root->right,r);
+        level_order(root->right,r);
     }
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int>r;
