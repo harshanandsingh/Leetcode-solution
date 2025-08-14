@@ -1,4 +1,4 @@
-// Last updated: 8/14/2025, 11:46:22 AM
+// Last updated: 8/14/2025, 12:10:17 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -13,29 +13,14 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        if(!root) return true;
-
-        queue<TreeNode*>q;
-        q.push(root);
-        while(!q.empty()){
-            int n = q.size();
-            vector<int>e;
-            while(n--){
-                TreeNode* a = q.front(); q.pop();
-                if(a){
-                    e.push_back(a->val);
-                    q.push(a->left);
-                    q.push(a->right);
-                }else{
-                    e.push_back(-101);
-                }
-            }
-            n = e.size();
-            int i = 0 , j = n-1;
-            while(i<=j){
-                if(e[i++]!=e[j--]) return false;
-            } 
-        }
-        return true;
+        if(!root) return false;
+        if(!root->left && !root->right) return true;
+        if(!root->left || !root->right) return false;
+        return check(root->left , root->right);
+    }
+    bool check(TreeNode* p , TreeNode* q){
+        if(!p &&!q) return true;
+        if(!p || !q || p->val != q->val) return false;
+        return check(p->left,q->right) && check(p->right , q->left);
     }
 };
