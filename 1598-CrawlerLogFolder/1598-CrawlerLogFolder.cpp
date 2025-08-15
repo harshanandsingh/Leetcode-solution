@@ -1,17 +1,15 @@
-// Last updated: 8/15/2025, 9:57:25 PM
+// Last updated: 8/15/2025, 10:00:08 PM
 class Solution {
 public:
-    int minOperations(vector<string>& logs) {
-        stack<string>s;
-        for(auto x:logs){
-            if(x=="../"){
-                if(!s.empty()) s.pop();
-            }else if(x=="./"){
-                continue;
-            }else{
-                s.push(x);
-            }
+    int minOperations(vector<string>& logs) 
+    {
+        int ans=0;
+        for(int i=0; i<logs.size(); i++)
+        {
+            if(logs[i]=="./") ;
+            else if(logs[i]=="../"){if(ans>0)ans--; else ;}
+            else ans++;
         }
-        return s.size();
+        return ans;
     }
 };
