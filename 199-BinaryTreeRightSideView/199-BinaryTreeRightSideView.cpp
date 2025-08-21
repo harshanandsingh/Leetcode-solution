@@ -1,4 +1,4 @@
-// Last updated: 8/2/2025, 8:40:13 AM
+// Last updated: 8/21/2025, 6:13:02 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -12,7 +12,28 @@
  */
 class Solution {
 public:
+    vector<int>ans;
+    void rs(TreeNode* root , int level ){
+        if(!root) return; 
+        // it's a pre order traversal 
+        if(ans.size()<level) ans.push_back(root->val); // as each level will give me one answer 
+        rs(root->right,level+1); // first visit right side and then visit left side 
+        rs(root->left,level+1);
+    }
     vector<int> rightSideView(TreeNode* root) {
+        rs(root,1);
+        return ans;
+    }
+
+
+
+
+
+
+
+
+    
+    vector<int> rightSideView1(TreeNode* root) {
         if(root == nullptr) return {};
 
         vector<int>ans;
