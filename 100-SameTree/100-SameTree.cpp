@@ -1,4 +1,4 @@
-// Last updated: 8/14/2025, 11:19:42 AM
+// Last updated: 8/21/2025, 5:33:59 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -13,6 +13,12 @@
 class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(!p && !q) return true;
+        if(!p || !q || p->val != q->val) return false;
+        return isSameTree(p->left , q->left) && isSameTree(p->right , q->right);
+    }
+    // this is correct code -> in abouve code we are trying to check or learn dfs in two tree 
+    bool isSameTree1(TreeNode* p, TreeNode* q) {
         // we have to check two tree are same or not 
         // i think we cant do dfs on both the tree at the same time 
         // so lets do bfs 
