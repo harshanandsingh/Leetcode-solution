@@ -1,4 +1,4 @@
-// Last updated: 8/4/2025, 9:50:57 AM
+// Last updated: 8/21/2025, 10:18:01 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -12,18 +12,29 @@
  */
 class Solution {
 public:
-    bool present = false;
-    void dfs(TreeNode* root, int targetSum,int sum){
-        if(!root || present) return;
+    //bool present = false;
+    bool dfs(TreeNode* root, int targetSum,int sum){
+        // if(!root || present) return;
+        if(!root) return false;
 
-        int cur_sum = sum  + root->val;
-        if(!root->left && !root->right && cur_sum == targetSum) present=true;
+        sum = sum  + root->val;
+        // if(!root->left && !root->right && cur_sum == targetSum) return true;
+        // else if(!root->left && !root->right && cur_sum != targetSum) return false;
+        if(!root->left && !root->right) return sum == targetSum;
 
-        dfs(root->left,targetSum,cur_sum);
-        dfs(root->right,targetSum,cur_sum);
+        return dfs(root->left,targetSum,sum) || dfs(root->right,targetSum,sum);
     }
+    // void dfs(TreeNode* root, int targetSum,int sum){
+    //     if(!root || present) return;
+
+    //     int cur_sum = sum  + root->val;
+    //     if(!root->left && !root->right && cur_sum == targetSum) present=true;
+
+    //     dfs(root->left,targetSum,cur_sum);
+    //     dfs(root->right,targetSum,cur_sum);
+    // }
     bool hasPathSum(TreeNode* root, int targetSum) {
-       dfs(root,targetSum,0); // root , target , current sum 
-       return present;
+       return dfs(root,targetSum,0); // root , target , current sum 
+       //return present;
     }
 };
