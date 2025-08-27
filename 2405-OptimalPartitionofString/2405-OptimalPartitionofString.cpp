@@ -1,17 +1,17 @@
-// Last updated: 8/27/2025, 9:48:42 AM
+// Last updated: 8/27/2025, 10:04:28 AM
 class Solution {
 public:
     int partitionString(string s) {
-        unordered_set<char>st;
-
-        int count = 1;
-        for(auto x:s){
-            if(st.find(x)!= st.end()){
-                count++;
-                st.clear();
+        vector<int>lastseen(26,-1);
+        int cnt=0;
+        int start=0;
+        for(int i=0;i<s.size();i++){
+            if(lastseen[s[i]-'a']>=start){
+                cnt++;
+                start=i;
             }
-            st.insert(x);
+            lastseen[s[i]-'a']=i;
         }
-        return count;
+        return cnt+1;
     }
 };
