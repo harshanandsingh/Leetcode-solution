@@ -1,31 +1,24 @@
-// Last updated: 9/9/2025, 7:57:01 PM
+// Last updated: 9/9/2025, 8:00:20 PM
 class Solution {
 public:
-    int minimumAverageDifference(vector<int>& nums) {
-        // i thnk it is a prefix sum problem 
-        // first find the prefix sum 
-        int n = nums.size();
-        if(n==1) return 0;
-        vector<long long int>ps(n);
-
-        long long int sum = 0;
-        for(int i = 0;i<n;i++){
-            sum+=nums[i];
-            ps[i]=sum;
+    int minimumAverageDifference(vector<int>& arr) {
+        long long sum = 0;
+        int n = arr.size();
+        for(auto i : arr){
+            sum += i;
         }
-
-        // onw once we have prefix sum ready lest solve the problem 
-        int index = 0;
-        long long int min_val = LLONG_MAX;
-        for(int i=0;i<n-1;i++){
-            long long int val = abs ( (ps[i] / (i+1)) - ((ps[n-1]-ps[i])/(n-i-1)) );
-            if(val < min_val){
-                min_val = val;
-                index = i;
+        long long mini = sum / n;
+        int ans = n - 1;
+        long long cur = 0;
+        for(int i = 0; i < arr.size() - 1; ++i){
+            cur += arr[i];
+            long long rem = sum - cur;
+            if(mini > abs((cur / (i + 1)) - (rem / (n - i - 1)))){
+                mini = abs((cur / (i + 1)) - (rem / (n - i - 1)));
+                ans = i;
             }
+            else if(mini == abs((cur / (i + 1)) - (rem / (n - i - 1))))ans = min (ans,i);
         }
-        if(ps[n-1]/n < min_val) index = n-1;
-        return index;
-
+        return ans;
     }
 };
