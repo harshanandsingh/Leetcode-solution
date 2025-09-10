@@ -1,23 +1,29 @@
-// Last updated: 9/10/2025, 2:34:30 PM
+// Last updated: 9/10/2025, 2:38:17 PM
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
-        // sort based on ending point 
-
         
-        sort(points.begin(),points.end(), [](vector<int>a , vector<int>b){
-            return a[1]<b[1];
-        });
 
-        int arrow = 1;
-        int end = points[0][1];
+        sort(points.begin(),points.end());
 
-        for(auto x:points){
-            if(x[0]>end){
-                end = x[1];
-                arrow++;
-            }
+
+        vector<int> prev = points[0];int cnt=1;
+        for(int i=1;i<points.size();i++)
+        {
+            
+              if(  prev[1] < points[i][0])
+              {
+                   
+                       cnt++;
+                   prev = points[i];
+              }
+              else if( prev[1] >= points[i][0])
+              {
+                
+
+                prev[1]=min(prev[1],points[i][1]);
+              }
         }
-        return arrow;
+        return cnt;
     }
 };
