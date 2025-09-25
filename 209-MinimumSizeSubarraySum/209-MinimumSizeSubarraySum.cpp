@@ -1,3 +1,4 @@
+// Last updated: 9/25/2025, 12:11:35 PM
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
@@ -6,13 +7,14 @@ public:
         int min_length = INT_MAX;
         int sum = 0 ;
         while(j<n){
-            sum+=nums[j++];
+            sum+=nums[j];
             while(sum>=target){
-                min_length = min(min_length,j-i);
-                sum-=nums[i++];
+                min_length = min(min_length,j-i+1);
+                sum-=nums[i];
+                i++;
             }
+            j++;
         }
-        if(min_length != INT_MAX) return min_length;
-        return 0;
+        return min_length == INT_MAX ? 0 : min_length;
     }
 };
