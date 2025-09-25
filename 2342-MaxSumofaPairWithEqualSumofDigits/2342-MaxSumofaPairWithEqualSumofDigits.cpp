@@ -1,33 +1,24 @@
-// Last updated: 9/25/2025, 10:42:57 AM
+// Last updated: 9/25/2025, 11:01:03 AM
 class Solution {
 public:
-    int sum_degit(int n){
-        int ans = 0;
-        while(n>0){
-            ans += n%10;
-            n /= 10;
+    int maximumSum(vector<int>& nums) 
+    {
+        vector<int>array(82,-1);
+        int ans=-1;
+        for(int num:nums)
+        {
+            int sum=0,temp=num;
+            while(temp>0)
+            {
+                sum+=temp%10;
+                temp/=10;
+            }
+            if(array[sum]!=-1)
+            {
+                ans=max(ans,num+array[sum]);
+            }
+            array[sum]=max(array[sum],num);
         }
         return ans;
-    }
-    int maximumSum(vector<int>& nums) {
-        
-        int n = nums.size();
-        unordered_map<int,vector<int>>m;
-        for(int i=0;i<n;i++){
-            int sum = sum_degit(nums[i]);
-            m[sum].push_back(nums[i]);
-        }
-
-        int max_sum = INT_MIN;
-        for(auto [a,b]:m){
-            int size = b.size();
-            if(size == 1) continue;
-
-            // Sort group in descending order
-            sort(b.begin(), b.end(), greater<int>());
-            max_sum = max(max_sum , b[0]+b[1]);
-        }
-        return max_sum == INT_MIN ? -1 : max_sum;
-
     }
 };
