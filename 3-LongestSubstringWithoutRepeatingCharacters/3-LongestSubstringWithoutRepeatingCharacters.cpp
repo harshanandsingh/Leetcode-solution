@@ -1,7 +1,23 @@
-// Last updated: 4/5/2025, 11:37:59 AM
+// Last updated: 9/25/2025, 12:25:22 PM
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int n = s.size();
+        int i=0,j=0;
+        int max_len = 0;
+        unordered_set<char>st;
+        while(j<n){
+            while(st.count(s[j])){
+                st.erase(s[i]);
+                i++;
+            }
+            st.insert(s[j]);
+            max_len = max(max_len,(int)st.size()); // type mismatch: int vs size_t( unsigned int) st.szie() return unsigned int not int 
+            j++;
+        }
+        return max_len;
+    }
+    int lengthOfLongestSubstring1(string s) {
         /*int i = 0, j = 0, ans = 0;
         string s1 = "";
         while (j < s.length()) {
@@ -45,7 +61,6 @@ public:
 
         while(j<n){
             m[s[j]]++;
-
             while(m[s[j]]>1){
                 m[s[i]]--;
                 i++;
