@@ -1,35 +1,33 @@
-// Last updated: 9/30/2025, 9:53:55 AM
+// Last updated: 9/30/2025, 9:57:00 AM
 class Solution {
 public:
     bool lemonadeChange(vector<int>& bills) {
-        unordered_map<int,int>m;
+        int five = 0, ten = 0;
 
-        int n = bills.size();
-
-        if(bills[0]>5) return false;
-
-        for(int i=0;i<n;i++){
-            if(bills[i]==5){
-                m[5]++;
-            }
-            else if(bills[i]==10){
-                if(m[5] > 0){
-                    m[5]--;
-                    m[10]++;
+        for (int bill : bills) {
+            if (bill == 5) {
+                five++;
+            } 
+            else if (bill == 10) {
+                if (five == 0) return false;
+                five--;
+                ten++;
+            } 
+            else { // bill == 20
+                if (ten > 0 && five > 0) {
+                    ten--;
+                    five--;
+                } 
+                else if (five >= 3) {
+                    five -= 3;
+                } 
+                else {
+                    return false;
                 }
-                else return false;
-            }
-            else{
-                if(m[10]>0 && m[5]>0){
-                    m[10]--;
-                    m[5]--;
-                }
-                else if(m[5]>=3){
-                    m[5]-=3;
-                }
-                else return false;
             }
         }
+
         return true;
+
     }
 };
