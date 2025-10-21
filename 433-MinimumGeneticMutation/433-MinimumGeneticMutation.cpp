@@ -1,4 +1,4 @@
-// Last updated: 10/21/2025, 10:25:26 PM
+// Last updated: 10/21/2025, 10:28:48 PM
 class Solution {
 public:
     // Intuition: we can see each string as a node and we can connect them if 
@@ -52,6 +52,7 @@ public:
                         // and the next node is available in `bank`
                         if (!vis[s] && st.find(s)!=st.end()) {
                             // push the next node to the queue
+                            if(s==end) return steps+1;
                             q.push(s);
                             // and mark it visited
                             vis[s] = 1;
