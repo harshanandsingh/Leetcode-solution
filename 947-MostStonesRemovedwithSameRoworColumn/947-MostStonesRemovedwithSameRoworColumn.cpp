@@ -1,4 +1,4 @@
-// Last updated: 10/22/2025, 11:07:15 AM
+// Last updated: 10/22/2025, 11:10:03 AM
 class DisjointSet{
     public:
     vector<int> parent, rank, size;
