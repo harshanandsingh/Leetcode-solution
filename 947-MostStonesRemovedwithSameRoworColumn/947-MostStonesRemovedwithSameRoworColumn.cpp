@@ -1,4 +1,4 @@
-// Last updated: 10/22/2025, 9:38:49 AM
+// Last updated: 10/22/2025, 10:55:01 AM
 class Solution {
 public:
     void dfs(vector<vector<int>>& stones,vector<bool>&vis,int index){
