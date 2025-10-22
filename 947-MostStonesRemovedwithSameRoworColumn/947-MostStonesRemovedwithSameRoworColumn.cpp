@@ -1,34 +1,75 @@
-// Last updated: 10/22/2025, 10:55:01 AM
+// Last updated: 10/22/2025, 11:07:15 AM
+class DisjointSet{
+    public:
+    vector<int> parent, rank, size;
+    DisjointSet(int n){
+        parent.resize(n+1);
+        rank.resize(n+1,0);
+        size.resize(n+1, 1);
+        for(int i=0; i<=n; i++){
+            parent[i] = i;
+        }
+    }
+    int findUPar(int node){
+        if(node == parent[node]){
+            return node;
+        }
+        return parent[node] = findUPar(parent[node]);
+    }
+    void unionByRank(int u, int v){
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if(ulp_u == ulp_v) return;
+        if(rank[ulp_u]<rank[ulp_v]){
+            parent[ulp_u] = ulp_v;
+        }
+        else if(rank[ulp_v]<rank[ulp_u]){
+            parent[ulp_v] = ulp_u;
+        }else{
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+    void unionBySize(int u, int v){
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if(ulp_u == ulp_v) return;
+        if(size[ulp_u]<size[ulp_v]){
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        } else{
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+};
+
 class Solution {
 public:
-    void dfs(vector<vector<int>>& stones,vector<bool>&vis,int index){
-        vis[index]=true;// make this node visited 
-
-        for(int i=0;i<stones.size();i++){
-            int row = stones[i][0];
-            int col = stones[i][1];
-            if(!vis[i] && (stones[index][0]==row || stones[index][1] == col)){
-                dfs(stones,vis,i);
-            }
-        }
-
-    }
     int removeStones(vector<vector<int>>& stones) {
-        // why dfs will work... first observe that all the node which is in same row and same column are in a same group
-        // and after removing element , in each group we left with one node always 
-        // so answer = n - no of group 
-        // now how to find group -> run dfs and all the node wich are in same row and same column -> comes in a same group 
-
+        int maxRow = 0;
+        int maxCol = 0;
         int n = stones.size();
-        vector<bool>vis(n,false);
-        int group = 0;
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
-                dfs(stones,vis,i);
-                group++;
+        for(auto it : stones){
+            maxRow = max(maxRow, it[0]);
+            maxCol = max(maxCol, it[1]);
+        }
+        DisjointSet ds(maxRow+maxCol+2);
+        unordered_map<int,int> stoneNodes;
+        for(auto it : stones){
+            int nodeRow = it[0];
+            int nodeCol = it[1] + maxRow+1;
+            ds.unionBySize(nodeRow,nodeCol);
+            stoneNodes[nodeRow] = 1;
+            stoneNodes[nodeCol] = 1;
+        }
+
+        int cnt = 0;
+        for(auto it: stoneNodes){
+            if(ds.findUPar(it.first)== it.first){
+                cnt++;
             }
         }
-        return n-group;
-
+        return n-cnt;
     }
 };
