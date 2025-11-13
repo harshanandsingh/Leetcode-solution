@@ -1,7 +1,7 @@
-// Last updated: 11/13/2025, 5:30:43 PM
+// Last updated: 11/13/2025, 5:31:01 PM
 class Solution {
 public:
-    void solve(string tiles,int &count,vector<bool>&vis,vector<int>&path){
+    void solve(string &tiles,int &count,vector<bool>&vis,vector<int>&path){
         int n = tiles.size();
         for(int i=0;i<n;i++){
             if(vis[i]) continue;
