@@ -1,4 +1,4 @@
-// Last updated: 8/21/2025, 10:18:01 PM
+// Last updated: 11/15/2025, 3:09:00 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -12,6 +12,40 @@
  */
 class Solution {
 public:
+    bool dfs1(TreeNode* root, int t_sum,int sum ){
+        if(!root) return false;
+
+        sum+=root->val;
+        if(!root->left && !root->right) return sum==t_sum;
+
+        return ((dfs1(root->left,t_sum,sum)) || (dfs1(root->right,t_sum,sum)) );
+
+    }
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        // if(!root) return false;
+        return  dfs1(root,targetSum,0);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //bool present = false;
     bool dfs(TreeNode* root, int targetSum,int sum){
         // if(!root || present) return;
@@ -33,7 +67,7 @@ public:
     //     dfs(root->left,targetSum,cur_sum);
     //     dfs(root->right,targetSum,cur_sum);
     // }
-    bool hasPathSum(TreeNode* root, int targetSum) {
+    bool hasPathSum1(TreeNode* root, int targetSum) {
        return dfs(root,targetSum,0); // root , target , current sum 
        //return present;
     }
