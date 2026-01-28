@@ -1,4 +1,4 @@
-// Last updated: 1/28/2026, 11:38:31 AM
+// Last updated: 1/28/2026, 11:40:00 AM
 1/**
 2 * Definition for singly-linked list.
 3 * struct ListNode {
@@ -27,7 +27,7 @@
 26
 27        ListNode* dummy = new ListNode();
 28        ListNode* prev_root = dummy;
-29        dummy->next = head;
+29        //dummy->next = head;
 30
 31        ListNode* temp = head;
 32        ListNode* curr = temp;
@@ -51,7 +51,7 @@
 50            temp = next_root;
 51            curr = next_root;
 52        }
-53        if(!curr) prev_root->next = temp;
+53        prev_root->next = temp;
 54        return dummy->next;
 55    }
 56};
