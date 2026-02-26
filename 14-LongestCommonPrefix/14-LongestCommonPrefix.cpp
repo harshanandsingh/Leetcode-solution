@@ -1,4 +1,4 @@
-// Last updated: 2/26/2026, 3:02:17 PM
+// Last updated: 2/26/2026, 3:02:54 PM
 1class Solution {
 2public:
 3    string longestCommonPrefix(vector<string>& strs){
@@ -11,7 +11,7 @@
 10            int j = 0;
 11            for(j=0;j<m;j++){
 12                if(strs[i][j] != s[j]){
-13                    s = strs[i].substr(0,j);
+13                    //s = strs[i].substr(0,j);
 14                    break;
 15                }
 16
