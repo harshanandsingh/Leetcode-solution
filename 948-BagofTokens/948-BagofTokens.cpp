@@ -1,27 +1,24 @@
-// Last updated: 8/4/2025, 12:52:43 PM
-class Solution {
-public:
-    int bagOfTokensScore(vector<int>& t, int p) {
-        int n = t.size();
-        sort(t.begin(),t.end());
-        int max_s=0;
-        int s=0;
-        int i=0,j=n-1;
-        while(i<=j){
-            if(p>=t[i]){ // till i have  power i will lose my power to gian as much score i can 
-                p-=t[i++];
-                s++;
-                max_s = max(max_s,s); // find the max score each time i gain a score 
-            }
-            else if(s>=1){ // if my score is >=1 i can loose score to gian more power 
-                p+=t[j--]; // loose score to gain most power 
-                s--;
-            }
-            else{
-                // when i dont have power lefet and also i dont have score >= 1 so i cnat do anything so break 
-                break;
-            }
-        }
-        return max_s;
-    }
-};
+// Last updated: 4/2/2026, 2:19:19 PM
+1class Solution {
+2public:
+3    int bagOfTokensScore(vector<int>& tokens, int power) {
+4
+5        sort(tokens.begin(),tokens.end());
+6        int i = 0 , j = tokens.size()-1;
+7        int ans = 0,max_ans= 0;
+8        while(i<=j){
+9            if(power>=tokens[i]){
+10                power-=tokens[i++];
+11                ans++;
+12            }else{
+13                if(ans == 0 ) return max_ans;
+14                ans--;
+15                power+=tokens[j--];
+16            }
+17            max_ans = max(max_ans,ans);
+18
+19        }
+20        return max_ans;
+21
+22    }
+23};
