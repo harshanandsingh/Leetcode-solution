@@ -1,39 +1,20 @@
-// Last updated: 11/11/2025, 6:51:07 PM
-class Solution {
-public:
-    struct State
-    {
-        int pos;
-        std::vector<int> subSet;
-    };
-
-    void BackTracing(std::vector<int> &nums, std::vector<std::vector<int>> &result, State &s)
-    {
-        if (s.pos == nums.size())
-        {
-            result.push_back(s.subSet);
-            return;
-        }
-
-        // select pos
-        s.subSet.push_back(nums[s.pos]);
-        s.pos++;
-        BackTracing(nums, result, s);
-        s.pos--;
-        s.subSet.pop_back();
-
-        //donot select pos
-        s.pos++;
-        BackTracing(nums, result, s);
-        s.pos--;
-    }
-
-    std::vector<std::vector<int>> subsets(std::vector<int> &nums)
-    {
-        State s;
-        s.pos = 0;
-        std::vector<std::vector<int>> result;
-        BackTracing(nums, result, s);
-        return result;
-    }
-};
+// Last updated: 5/9/2026, 6:23:05 PM
+1class Solution {
+2public:
+3    vector<vector<int>>ans;
+4    void result(vector<int>& nums,int start,vector<int>&par_ans){
+5        if(start == nums.size()){
+6            ans.push_back(par_ans);
+7            return;
+8        }
+9        par_ans.push_back(nums[start]);
+10        result(nums,start+1,par_ans);
+11        par_ans.pop_back();
+12        result(nums,start+1,par_ans);
+13    }
+14    vector<vector<int>> subsets(vector<int>& nums) {
+15        vector<int>v;
+16        result(nums,0,v);
+17        return ans;
+18    }
+19};
