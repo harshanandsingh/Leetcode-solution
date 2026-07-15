@@ -1,36 +1,15 @@
-// Last updated: 8/8/2025, 12:36:55 PM
-class Solution {
-public:
-    int removeDuplicates(vector<int>& arr) {
-
-        int n = arr.size();
-        int j = 0 , i = 0;
-        while(j<n){
-
-            int p = arr[j] , count = 0;
-            while(j<n && p == arr[j]){
-                j++; count++;
-            }
-            int a = i + count ;
-            int b = i + 2;
-            while(i<a && i<b){
-                arr[i++] = p;
-            }
-        }
-        return i;
-       
-        //         int count = 0;
-        // for(int i = 0; i < nums.size(); i++) {
-        //     if(nums.size()<2){
-        //         return 1;
-        //     }
-        //     if(i < nums.size() - 2 && nums[i] == nums[i+2]) {
-        //         continue;
-        //     }
-        //     nums[count] = nums[i];
-        //     count++;
-            
-        // }
-        // return count;
-    }
-};
+// Last updated: 7/15/2026, 5:49:35 PM
+1class Solution {
+2public:
+3    int removeDuplicates(vector<int>& nums) {
+4        int n = nums.size();
+5        int i=0,j=0,k=0;
+6        while(j<n){
+7            while(j<n && nums[j]==nums[i]) j++;
+8            nums[k++]=nums[i];
+9            if(j-i>=2) nums[k++]=nums[i];
+10            i=j;
+11        }
+12        return k;
+13    }
+14};
