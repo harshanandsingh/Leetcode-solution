@@ -1,18 +1,17 @@
-// Last updated: 4/14/2025, 7:20:55 PM
-class Solution {
-public:
-    int lengthOfLastWord(string s) {
-        int n = s.size();
-        
-        int i=n-1;
-        while(s[i]==' ') i--;
-        if(i<0) return 0;
-        int count=0;
-        for(;i>=0;i--){
-            if(s[i]!=' ') count++;
-            else break;
-        }
-
-        return count;
-    }
-};
+// Last updated: 7/29/2026, 4:37:20 PM
+1class Solution {
+2public:
+3    int lengthOfLastWord(string s) {
+4        int n = s.size();
+5        int i = n - 1;
+6        int count = 0;
+7        while(i>=0 && s[i]==' ') i--;
+8
+9        while(i>=0 && s[i]!=' '){
+10            count++;
+11            i--;
+12        }
+13        return count;
+14
+15    }
+16};
