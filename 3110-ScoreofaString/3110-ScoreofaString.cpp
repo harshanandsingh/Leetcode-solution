@@ -1,16 +1,12 @@
-// Last updated: 7/24/2025, 10:07:50 PM
-class Solution {
-public:
-    int scoreOfString(string s) {
-        int  n = s.size();
-        int sum = 0;
-        for(int i = 0 ;i<n-1;i++){
-            int a = s[i]-'a';
-            int b = s[i+1]-'a';
-            // cout<<a<<" "<<b<<endl;
-            sum = sum + abs(a-b);
-           
-        }
-        return sum;
-    }
-};
+// Last updated: 7/29/2026, 4:24:13 PM
+1class Solution {
+2public:
+3    int scoreOfString(string s) {
+4        int sum = 0;
+5        int n = s.size();
+6        for(int i=1;i<n;i++){
+7            sum+= abs( (s[i]-'a') - (s[i-1]-'a') );
+8        }
+9        return sum;
+10    }
+11};
