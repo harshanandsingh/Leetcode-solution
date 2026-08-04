@@ -1,4 +1,4 @@
-// Last updated: 8/4/2026, 4:37:12 PM
+// Last updated: 8/4/2026, 4:41:00 PM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -21,7 +21,7 @@
 20        int dia = left + right;
 21        ans = max(ans,dia);
 22
-23        if(left ==0 && right ==0) return 1;
+23       // if(left ==0 && right ==0) return 1;
 24        return max(left,right)+1;
 25
 26    }
