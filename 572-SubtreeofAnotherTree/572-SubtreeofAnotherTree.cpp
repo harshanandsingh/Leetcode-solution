@@ -1,31 +1,43 @@
-// Last updated: 11/19/2025, 1:03:54 PM
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool check(TreeNode* root1, TreeNode* root2){
-        if(!root1 && !root2) return true;
-
-        if((!root1 && root2) || (root1 && !root2)) return false;
-
-        if(root1->val != root2->val) return false;
-
-        return check(root1->left,root2->left) && check(root1->right,root2->right);
-    }
-    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        if(!root) return false;
-
-        if(check(root,subRoot)) return true;
-        return isSubtree(root->left,subRoot) ||  isSubtree(root->right,subRoot);
-
-    }
-};
+// Last updated: 8/5/2026, 9:16:11 AM
+1/**
+2 * Definition for a binary tree node.
+3 * struct TreeNode {
+4 *     int val;
+5 *     TreeNode *left;
+6 *     TreeNode *right;
+7 *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+8 *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+9 *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+10 * };
+11 */
+12class Solution {
+13public:
+14    TreeNode* same = nullptr;
+15    // void find_same(TreeNode* root, TreeNode* subRoot){
+16    //     if(root == nullptr) return ;
+17    //     if(root->val == subRoot->val) same = root;
+18
+19    //     find_same(root->left,subRoot);
+20    //     find_same(root->right,subRoot);
+21    // }
+22    bool isSameTree(TreeNode* p, TreeNode* q) {
+23        if( (p==nullptr && q != nullptr) || (p!=nullptr && q == nullptr)) return false;
+24        else if(p == nullptr && q==nullptr) return true;
+25        
+26        if(p->val != q->val) return false;
+27        return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
+28    }
+29    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+30        if(isSameTree(root,subRoot)) return true;
+31        if(!root) return false;
+32        return isSubtree(root->left,subRoot) || isSubtree(root->right,subRoot);
+33        return false;
+34
+35        // find the the root of subroot once you have then find its same or not 
+36        // if(root==nullptr && subRoot==nullptr) return true;
+37        // else if(root == nullptr && subRoot != nullptr) return false;
+38        // else if(root!= nullptr && subRoot == nullptr) return true;
+39        // find_same(root,subRoot);
+40        // return isSameTree(p,subRoot) || ;
+41    }
+42};
