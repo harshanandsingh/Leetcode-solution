@@ -1,4 +1,4 @@
-// Last updated: 8/5/2026, 9:16:11 AM
+// Last updated: 8/5/2026, 9:19:54 AM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -31,7 +31,7 @@
 30        if(isSameTree(root,subRoot)) return true;
 31        if(!root) return false;
 32        return isSubtree(root->left,subRoot) || isSubtree(root->right,subRoot);
-33        return false;
+33        // return false;
 34
 35        // find the the root of subroot once you have then find its same or not 
 36        // if(root==nullptr && subRoot==nullptr) return true;
